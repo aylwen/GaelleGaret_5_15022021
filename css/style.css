@@ -1,0 +1,49 @@
+.container {
+  background-color: #F3E9F1;
+}
+
+a{
+ color: black;   
+}
+
+a:hover{
+    text-decoration: none; 
+    color: #FFA500;
+}
+
+.header{
+  text-align: center;
+  #logo-main {
+    display: block;
+    margin: 20px auto;
+  }
+}
+
+.navbar-nav{
+  display: flex;
+  flex-direction: row;   
+}
+
+.nav-item{
+padding: 5px;    
+}
+
+.product-title{
+ padding-bottom: 10px;
+}
+
+.row{
+    margin-right: 0;
+    margin-left: 0;
+    
+}
+
+.d-flex{
+ margin-top: 20px;   
+ margin-bottom: 20px;   
+}
+
+.btn-warning{
+ background-color: #FFA500;    
+}
+
