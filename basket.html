@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Orinoco</title>
+	<meta name="description" content="Orinoco">
+	
+    <script src="https://kit.fontawesome.com/7d17636476.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+	
+</head>
+<body class="container">
+    <header class="header">
+        <img id="logo-main" src="images/orinoco-logo.png" alt="Logo d'Orinoco" width="200">
+        <div class=navbar>
+            <ul class="nav navbar-nav mx-auto">
+                <li class="nav-item"><a href="index.html">Accueil</a></li>
+                <li class="nav-item"><a href="basket.html"><i class="fas fa-shopping-cart"></i> Panier (<span id=basketCount>0</span>)</a></li>
+            </ul>
+        </div>
+    </header>
+    
+    
+	<main class="container-fluid" id="main_basket">
+
+	
+        <div class="cart_buttons row"> 
+            <a type="button" class="btn btn-warning mt-3 text-white" href="index.html">Continuer mes achats</a> 
+            <a type="button" class="btn btn-warning mt-3 text-white" href="javascript:emptyBasket();">Vider le panier</a> 
+        </div>
+        
+        <div id=basket_table>
+        
+        
+        </div>
+        
+        <form id="myForm" method="post" action="javascript:checkForm();" class="needs-validation" novalidate>
+               <fieldset>
+                 <legend class="font-weight-bold">Vos informations</legend>
+                 
+                 <div class="form-group">
+                   <label for="name">Entrez votre nom</label>
+                   <input type="text" class="form-control" id="name" placeholder="Nom" required>
+                 </div>
+                 
+                <div class="form-group">
+                   <label for="first_name">Entrez votre prénom</label>
+                   <input type="text" class="form-control" id="first_name" placeholder="Prénom" required>
+                 </div>
+                 
+                 <div class="form-group">
+                   <label for="email">Entrez votre mail</label>
+                   <input type="email" class="form-control" id="email" placeholder="nom.prenom@exemple.com" required>
+                 </div>
+                 
+                <div class="form-group">
+                   <label for="address">Entrez votre adresse</label>
+                   <input type="text" class="form-control" id="address" required>
+                 </div>
+                 
+                <div class="form-group">
+                   <label for="city">Entrez votre ville</label>
+                   <input type="text" class="form-control" id="city" required>
+                 </div>
+            
+                 <div class="form-group">
+                   <label for="comment">Laissez un commentaire si besoin</label>
+                   <textarea class="form-control" id="comment" rows="3"></textarea>
+                 </div>
+               </fieldset>
+               	
+                <div class="cart_buttons text-center"> 
+                    <button class="btn btn-warning mt-3 text-white align-self" type="submit">Valider et payer</button> 
+                </div>
+             </form>
+
+	</main>
+	<footer>
+	</footer>
+</body>
+</html>
+
+<!-- Scripts JS -->
+<script src="js/script.js"></script>
+    <script>
+        fillBasketPage();
+    </script>
+<!-- Scripts JS END -->
