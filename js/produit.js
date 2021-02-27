@@ -66,7 +66,7 @@ function getProductCard(product, page_product=false){
     // Création des élements images et div avec la classe card body, enfants de divParent 
     let image = document.createElement("img");
     divCard.appendChild(image);
-    image.classList.add("mr-2", "mb-3", "mb-lg-0", "rounded-circle");
+    image.classList.add("mr-2", "mb-3", "mb-lg-0", "img-fluid");
     image.src = product.imageUrl;
     image.width = "150"
     image.height = "150"
