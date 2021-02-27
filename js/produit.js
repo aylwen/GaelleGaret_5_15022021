@@ -1,34 +1,59 @@
-const productType = "teddies" 
-const APIURL = "http://localhost:3000/api/" + productType + "/";
-
 
 async function getProducts(id="") {
-    try {
-        let url = APIURL+id
-        let response = await fetch(url);
+    
+    // if id is defined, return data this product id from API 
+    // else return all products list
+    
+    let url = APIURL+id
+    let data = await fetch(url, {}).then(response => {
         if (response.ok) {
-            let products = await response.json();
-            return products;
+            return response.json()
         } else {
-            console.error(response.status)
+            throw response.status
         }
-    } catch (e) {
-        console.log(e);
-    }
+    }).catch(error => {
+        console.log(error)
+        alert("DB connection problem")        
+        })
+    return data
 }
 
-async function createIndexPage() {
-    const products = await getProducts();
-    const main = document.getElementById("main");
-    console.log(products)
-    for (let i = 0; i < products.length; i++) {
-        divContainer = getProductCard(products[i])
-        main.appendChild(divContainer);
-        
-    }
+
+function createIndexPage() {
+    
+    // complete main of index.html page for showing all available products
+    
+    getProducts().then(products => {
+        const main = document.getElementById("main");
+        for (let i = 0; i < products.length; i++) {
+            // add a container for each product
+            divContainer = getProductCard(products[i])
+            main.appendChild(divContainer);
+        }
+    })
 }
+
+
+function getProductPage(id){
+    
+    // complete main of index.html page for showing a id product page
+    
+    getProducts(id).then(product => {
+        divContainer = getProductCard(product, true)
+        const main = document.getElementById("main");
+        main.innerHTML = '';
+        
+        // add the container of product defined by id
+        main.appendChild(divContainer);
+    })
+}
+
+
 
 function getProductCard(product, page_product=false){
+    
+    // construct a container showing a product
+    // if it's a product page, show a buy button and option of colour, else show button
     
     let divContainer = document.createElement("div");
     divContainer.classList.add("container", "d-flex", "mt-50", "mb-50", "row", "justify-content-md-center")
@@ -105,11 +130,27 @@ function getProductCard(product, page_product=false){
 }
 
 
-async function getProductPage(id){
-    const product = await getProducts(id);
-    divContainer = getProductCard(product, true)
-    const main = document.getElementById("main");
-    main.innerHTML = '';
-    main.appendChild(divContainer);
+function addToBasket(id, name, price){
+    
+    // add a product 
+    
+    //update basket in localStorage
+    let basket  = JSON.parse(localStorage.getItem("basket"));
+    if (!(id in basket)){
+        basket[id] = {"nb": 1, "price": price, "name": name};
+    } else {
+        basket[id]["nb"] += 1;
+    }
+    
+    localStorage.setItem("basket", JSON.stringify(basket));
+
+    //fill the number of products in basket in html page 
+    const number = document.getElementById("basketCount");
+    number.innerHTML = (parseInt(number.innerHTML) + 1).toString()
+    
 }
+
+
+
+
 

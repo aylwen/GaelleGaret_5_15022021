@@ -1,57 +1,14 @@
 
-if(! localStorage.getItem("basket")){;
-  	//Le panier est un tableau de produits
-    var basket = {}
-  	localStorage.setItem("basket", JSON.stringify(basket));
-};
-
-
-const number = document.getElementById("basketCount");
-number.innerHTML = getBasketCount().toString()
-
-
-function getBasketCount() {
-    let count = 0;
-    let basket = JSON.parse(localStorage.getItem("basket"));
-    console.log(basket);
-    for (let id in basket) {
-        count += basket[id]["nb"];
-    }
-    return count;
-}
-
-
-async function addToBasket(id, name, price){
-    let basket  = JSON.parse(localStorage.getItem("basket"));
-    if (!(id in basket)){
-        basket[id] = {"nb": 1, "price": price, "name": name};
-        console.log(basket)
-    } else {
-        basket[id]["nb"] += 1;
-    }
+function fillBasketPage(){
     
-    localStorage.setItem("basket", JSON.stringify(basket));
-    console.log(localStorage.getItem("basket"))
-
-    const number = document.getElementById("basketCount");
-    number.innerHTML = (parseInt(number.innerHTML) + 1).toString()
-    
-}
-
-async function fillBasketPage(){
+    // fill the basket_table element in basket.html
 
     let totalAmount = 0;
     let totalQuantity = 0;
     
-    let basket  = JSON.parse(localStorage.getItem("basket"));
-
-
-    console.log(basket)
-    
+    const basket  = JSON.parse(localStorage.getItem("basket"));
     const main = document.getElementById("basket_table");
     main.innerHTML = '';
-
-    
     
     let table = document.createElement("table");
     main.appendChild(table)
@@ -76,7 +33,6 @@ async function fillBasketPage(){
 
     
     for (let i in basket) {
-        console.log(i)
     
         let item = document.createElement("tr");
         tbody.appendChild(item)
@@ -101,6 +57,7 @@ async function fillBasketPage(){
     
     totalAmount = totalAmount.toString() + " $"
     
+    // keep trace of total amount for confirmation page
     localStorage.setItem("amount", totalAmount);
     
     let item = document.createElement("tr");
@@ -114,14 +71,21 @@ async function fillBasketPage(){
     
 }
 
-async function emptyBasket(){
+
+function emptyBasket(){
     
+    // empty basket
+    
+    //reinitialize basket in localStorage 
   	localStorage.setItem("basket", "{}");
     
+    //put 0 for number of products in basket in html page 
     const number = document.getElementById("basketCount");
     number.innerHTML = "0"
     
+    //rewrite html basket page
     fillBasketPage()
     
 }
+
 
