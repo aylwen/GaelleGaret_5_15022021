@@ -46,7 +46,7 @@ function getFormInfos() {
     return contact
 }
 
-async function updateData(){
+function updateData(){
     
 
     // get form and basket infos
@@ -65,7 +65,7 @@ async function updateData(){
     dataToSend = JSON.stringify({contact, products})
     
     let url = APIURL+"order"
-    let response = await fetch(url, {
+    fetch(url, {
         method: 'POST',
         headers: {
             'content-type': 'application/json'

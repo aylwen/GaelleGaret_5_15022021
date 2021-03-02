@@ -1,11 +1,11 @@
 
-async function getProducts(id="") {
+function getProducts(id="") {
     
     // if id is defined, return data this product id from API 
     // else return all products list
     
     let url = APIURL+id
-    let data = await fetch(url, {}).then(response => {
+    let data = fetch(url, {}).then(response => {
         if (response.ok) {
             return response.json()
         } else {
